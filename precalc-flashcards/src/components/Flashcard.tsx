@@ -18,13 +18,18 @@ const Flashcard: React.FC<FlashcardProps> = ({ flashcard, onEdit, onDelete }) =>
     }
   };
 
+  const handleEdit = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card flip
+    onEdit(flashcard);
+  };
+
   return (
     <div className="flip-card-container">
       <div 
         className={`flip-card ${isFlipped ? 'flipped' : ''}`}
         onClick={handleFlip}
       >
-        {/* Front of card */}
+        {/* Front side */}
         <div className="flip-card-front">
           <div className="card h-100">
             <div className="card-header d-flex justify-content-between align-items-center">
@@ -32,10 +37,7 @@ const Flashcard: React.FC<FlashcardProps> = ({ flashcard, onEdit, onDelete }) =>
               <div className="btn-group">
                 <button
                   className="btn btn-sm btn-outline-primary"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onEdit(flashcard);
-                  }}
+                  onClick={handleEdit}
                 >
                   Edit
                 </button>
@@ -58,7 +60,7 @@ const Flashcard: React.FC<FlashcardProps> = ({ flashcard, onEdit, onDelete }) =>
           </div>
         </div>
 
-        {/* Back of card */}
+        {/* Back side */}
         <div className="flip-card-back">
           <div className="card h-100">
             <div className="card-header d-flex justify-content-between align-items-center">
@@ -66,10 +68,7 @@ const Flashcard: React.FC<FlashcardProps> = ({ flashcard, onEdit, onDelete }) =>
               <div className="btn-group">
                 <button
                   className="btn btn-sm btn-outline-primary"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onEdit(flashcard);
-                  }}
+                  onClick={handleEdit}
                 >
                   Edit
                 </button>
